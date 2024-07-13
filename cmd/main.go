@@ -1,10 +1,10 @@
 package main
 
 import (
-	"fmt"
+	"github.com/gin-gonic/gin"
 	"log"
+	"user-service/internal/router"
 	"user-service/pkg/database"
-	"user-service/pkg/services"
 )
 
 func main() {
@@ -12,17 +12,15 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	//newUser := model.User{Name: "Beka", Email: "J@gmail.com", Username: "Kira23", Password: "123", ProfilePicture: ";;", Bio: "Smth about me"}
-	//_, err = services.AddUser(newUser)
+	r := gin.Default()
+	router.InitRouter(r)
+	r.Run(":8080")
+	//users, err := services.ReadAllUsers()
 	//if err != nil {
 	//	fmt.Println(err)
 	//}
-	//newNewUser := model.User{Name: "Heheheheh", Email: "J@com", Username: "Kira23", Password: "12345", ProfilePicture: "KIRA", Bio: "Justice"}
-	//
-	//_, err = services.UpdateUser(newNewUser, "J@gmail.com")
-	//if err != nil {
-	//	log.Fatal(err)
-	//}
-	_, err = services.GetPublicUser("Kira234")
-	fmt.Println(err)
+	//fmt.Println(users)
+	//fmt.Println(r)
+	//err = services.DeleteUser("J@gmdail.com")
+	//fmt.Println(err)
 }

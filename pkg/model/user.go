@@ -3,6 +3,7 @@ package model
 import "time"
 
 type User struct {
+	ID             int64
 	Name           string
 	Email          string
 	Username       string
@@ -13,7 +14,8 @@ type User struct {
 	UpdatedAt      time.Time
 }
 
-type PublicUser struct {
+type UserPublic struct {
+	ID             int
 	Name           string
 	Username       string
 	ProfilePicture string

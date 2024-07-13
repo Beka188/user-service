@@ -3,6 +3,7 @@ package database
 import (
 	"database/sql"
 	_ "github.com/mattn/go-sqlite3" // Import SQLite driver
+	"log"
 )
 
 var DB *sql.DB
@@ -28,5 +29,21 @@ func InitDb() error {
 	if err != nil {
 		return err
 	}
+
+	createTriggerSQL := `
+	CREATE TRIGGER IF NOT EXISTS update_timestamp
+	AFTER UPDATE ON users
+	FOR EACH ROW
+	BEGIN
+		UPDATE users
+		SET UpdatedAt = CURRENT_TIMESTAMP
+		WHERE ID = OLD.ID;
+	END;`
+
+	_, err = DB.Exec(createTriggerSQL)
+	if err != nil {
+		log.Fatalf("Failed to create trigger: %v", err)
+	}
+
 	return nil
 }
