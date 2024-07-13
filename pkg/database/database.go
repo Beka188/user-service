@@ -16,9 +16,10 @@ func InitDb() error {
 	createTableSQL := `CREATE TABLE IF NOT EXISTS users
 	(ID INTEGER PRIMARY KEY AUTOINCREMENT,
 	 Name STRING, 
-	 Email STRING,
-	 Username STRING, 
+	 Email STRING UNIQUE NOT NUll,
+	 Username STRING UNIQUE NOT NULL, 
 	 Password String,
+	 ProfilePicture STRING,
 	 Bio STRING,
 	 CreatedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
 	 UpdatedAt DATETIME DEFAULT CURRENT_TIMESTAMP)`
